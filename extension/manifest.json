@@ -1,0 +1,11 @@
+{
+    "name": "Extension",
+    "version": "1.0",
+    "manifest_version": 3,
+    "chrome_url_overrides": {
+        "newtab": "./pages/home/index.html"
+      },
+    "permissions": [
+      "topSites"
+    ]
+}
