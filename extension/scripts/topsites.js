@@ -1,9 +1,11 @@
 export function mostVisited(urls)
 {   
-    var url= document.getElementById('most-visted-sites-content');
-    for (var i = 0; i < 5; i++) 
+    var url= document.getElementById('topSites');
+    for (var i = 0; i < 3; i++) 
     {
-        url.innerHTML += urls[i].url + "<br>";      
+        var site = urls[i];
+        var input = site.url.substring(8, site.url.length-1);
+        url.innerHTML += input + " ";      
     }
 }
 
