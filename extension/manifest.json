@@ -6,6 +6,7 @@
         "newtab": "./pages/home/index.html"
       },
     "permissions": [
-      "topSites"
+      "topSites",
+      "storage"
     ]
 }
