@@ -8,5 +8,10 @@
     "permissions": [
       "topSites",
       "storage"
-    ]
+    ],
+    "icons": {
+      "16": "./images/16.png",
+      "48": "./images/48.png",
+      "128": "./images/128.png"
+  }
 }
