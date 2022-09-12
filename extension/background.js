@@ -6,7 +6,18 @@ function removeWww (urlvar) {
     return urlvar.substring(4);
   }
 }
-var url = removeWww(window.location.host);
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+      console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+      if (request.func === "ping") {
+        console.log(request.message)
+          sendResponse({farewell: "ping"});
+      }
+  }
+);
 
 
 
@@ -14,9 +25,10 @@ var url = removeWww(window.location.host);
 var currentTime = 0;
 const currentPage = () =>
 {
-  var currentUrl = removeWww(window.location.host);
+  var currentUrl = "hi";
   currentTime++;
-  alert(`OG: ${url} Current: ${currentUrl} Time: ${currentTime}`);
+  console.log(`OG: ${currentUrl} Current: ${currentUrl} Time: ${currentTime}`);
 }
 
 setInterval(currentPage, 1000);
+

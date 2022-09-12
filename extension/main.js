@@ -90,4 +90,15 @@ const currentPage = () => {
   updateStats();
 }
 
-setInterval(currentPage, 10000);
+//setInterval(currentPage, 10000);
+
+//Ping the background script to keep it from getting onloaded
+function pingBG() {
+  chrome.runtime.sendMessage({func: "ping", message: "pong"}, function(response) {
+    console.log(response.farewell);
+  });
+}
+
+//Ping every 4 mins
+pingBG()
+setInterval(pingBG, 240000)

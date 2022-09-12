@@ -76,4 +76,4 @@ const onLoad = () =>
     document.getElementById("stat-box-friends-stats").addEventListener("mouseout", hideFriendsStats);
 }
 
-window.onload(onLoad());
+window.onload = onLoad();
