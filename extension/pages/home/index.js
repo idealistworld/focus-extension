@@ -1,4 +1,5 @@
 import {mostVisited} from "../../scripts/topsites.js";
+import { totalTime } from "../../scripts/totaltime.js";
 
 const loadData = () =>
 {    
@@ -60,6 +61,8 @@ const hideFriendsStats = () =>
 
 const onLoad = () =>
 {
+    totalTime();
+    mostVisited();
     document.getElementById("stat-box-total-time").addEventListener("mouseover", displayTotalTime);
     document.getElementById("stat-box-total-time").addEventListener("mouseout", hideTotalTime);
 

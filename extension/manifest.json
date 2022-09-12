@@ -1,21 +1,33 @@
 {
-    "name": "focusIN",
-    "version": "1.0",
-    "manifest_version": 3,
-    "chrome_url_overrides": {
-        "newtab": "./pages/home/index.html"
-      },
-    "permissions": [
-      "topSites",
-      "storage"
-    ],
-    "icons": {
-      "16": "./images/16.png",
-      "48": "./images/48.png",
-      "128": "./images/128.png"
+  "name": "focusIN",
+  "version": "1.0",
+  "manifest_version": 3,
+  "chrome_url_overrides": {
+    "newtab": "./pages/home/index.html"
+  },
+  "permissions": [
+    "topSites",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "./images/16.png",
+    "48": "./images/48.png",
+    "128": "./images/128.png"
   },
   "action": {
     "default_popup": "./pages/extension/extension.html",
     "default_icon": "./images/128.png"
-}
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "main.js"
+      ]
+    }
+  ]
 }
