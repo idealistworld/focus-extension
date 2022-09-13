@@ -1,5 +1,64 @@
 import {mostVisited} from "../../scripts/topsites.js";
 import { totalTime } from "../../scripts/totaltime.js";
+//importing not working for class
+class LocalStorage {
+    load(name, callback, callbackIsUndefined) {
+        chrome.storage.local.get(name, function(item) {
+            if (item[name] !== undefined) {
+                var result = item[name];
+                if (result !== undefined)
+                    callback(result);
+            } else {
+                if (callbackIsUndefined !== undefined)
+                    callbackIsUndefined();
+            }
+        });
+    }
+
+    save(name, value) {
+        chrome.storage.local.set({
+            [name]: value
+        });
+    }
+
+    getMemoryUse(name, callback) {
+        chrome.storage.local.getBytesInUse(name, function(item) {
+            if (item !== undefined) {
+                callback(item[name]);
+            }
+        });
+    };
+
+    test() {
+        console.log("imported")
+    }
+}
+
+//Sort the Database
+var storage = new LocalStorage()
+function empty () {
+    console.log("Nothing to sort, db is empty")
+}
+
+function sort(result) {
+    result.sort(compare)
+    storage.save("db", result)
+    console.log(result[0].unixTimeStamps.length)
+    totalTime(result);
+    mostVisited();
+}
+
+function compare( a, b ) {
+    if ( a.unixTimeStamps.length > b.unixTimeStamps.length ){
+      return -1;
+    } else {
+        return 1;
+    }
+}
+
+function sortDB() {
+    storage.load("db", sort, empty)
+}
 
 const loadData = () =>
 {    
@@ -61,8 +120,7 @@ const hideFriendsStats = () =>
 
 const onLoad = () =>
 {
-    totalTime();
-    mostVisited();
+    sortDB();
     document.getElementById("stat-box-total-time").addEventListener("mouseover", displayTotalTime);
     document.getElementById("stat-box-total-time").addEventListener("mouseout", hideTotalTime);
 

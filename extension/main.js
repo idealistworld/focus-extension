@@ -95,7 +95,7 @@ const currentPage = () => {
 //Ping the background script to keep it from getting onloaded
 function pingBG() {
   chrome.runtime.sendMessage({func: "ping", message: "pong"}, function(response) {
-    console.log(response.farewell);
+    //console.log(response.farewell);
   });
 }
 
