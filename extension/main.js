@@ -1,96 +1,62 @@
-var currentTime = 0;
-var visitAdded = false;
+//Log the Visit to our db
+storage = new LocalStorage()
 
+//Copied from background.js
 //Get the URL and clip it
-function removeWww(urlvar) {
-  if (urlvar.indexOf("www.") === -1) {
-    return urlvar;
+function urlToWebsite (_url) {
+  //Remove everything before "//"
+  const reg = /\/\/(.*)/gm
+  var match = _url.match(reg)
+  var found = JSON.stringify(match).slice(4,-2)
+  //Remove everything after the first "/"
+  var found2 = found.slice(0, found.indexOf("/"))
+  //console.log(_url + " match " + typeof(match) + " found " + found + ")
+  //Remove WWW
+  if (found2.indexOf("www.") === -1) {
+    return found2;
   } else {
-    return urlvar.substring(4);
+    return found2.substring(4);
   }
 }
-var url = removeWww(window.location.host);
 
-//Getters and setters for the site lists
-function getVisitedSites() {
-  chrome.storage.local.get({
-    sitesVisited: [],
-    sitesData: []
-  }, function (items) {
-    const sitesVisited = items.sitesVisited;
-    const sitesData = items.sitesData;
-    updateVisitedSites(sitesVisited, sitesData, removeWww(window.location.host));
-  });
-}
+//Turns url into properly formatted website
+var url = window.location.href
+var website = urlToWebsite(url)
 
-function updateVisitedSites(sitesVisitedList, sitesDataList, _urlvar) {
-  if (sitesVisitedList.indexOf(_urlvar) === -1) {
-    var site = {
-      url: _urlvar,
-      time: currentTime,
-      visits: 1
+//Add to db
+function genOnLoad (curUrl) {
+  return function (result) {
+    console.log(JSON.stringify(result))
+    var db = result
+    var found = checkDB(db, curUrl)
+    if (found === -1) {
+      db.push({"website": curUrl, unixTimeStamps: [], "visits": 1})
+    } else {
+      db[found].visits += 1
     }
-    sitesDataList.push(site);
-    sitesVisitedList.push(_urlvar);
-    chrome.storage.local.set({
-      sitesVisited: sitesVisitedList,
-      sitesData: sitesDataList
-    }, function () {
-    });
+    storage.save("db", db)
   }
 }
 
-//Changing data within the data lists
-function displaySiteData(url) {
-  chrome.storage.local.get({
-    sitesData: [],
-    sitesVisited: []
-  }, function (items) {
-    var index = items.sitesVisited.indexOf(url);
-   // alert(items.sitesData[index].url + " " + items.sitesData[index].time + " " + items.sitesData[index].visits);
-  });
+function genOnLoadEmpty (curUrl) {
+  return function (result) {
+    const db = []
+    db.push({"website": curUrl, unixTimeStamps: [], "visits": 1})
+    storage.save("db", db)
+  }
 }
 
-function updateStats() {
-  getSitesToUpdate();
-  }
-
-function getSitesToUpdate ()
-{
-  chrome.storage.local.get({
-    sitesData: [],
-    sitesVisited: []
-  }, function (items) {
-    var index = items.sitesVisited.indexOf(url);
-    var currentVisits = items.sitesData[index].visits;
-    const sitesDataChanged = items.sitesData;
-    sitesDataChanged[index].time =  sitesDataChanged[index].time + 10;
-    if (visitAdded === false)
-    {
-      sitesDataChanged[index].visits = currentVisits + 1;
-      visitAdded = true;
+function checkDB (db, curUrl) {
+  for (let i = 0; i < db.length; i++) {
+    if (db[i].website == curUrl) {
+      return i
     }
-    updateLists(sitesDataChanged)
-  })
   }
-
-  function updateLists (sitesDataChanged) {
-    chrome.storage.local.set({
-      sitesData: sitesDataChanged
-    }, function () {
-    });
-  }
-
-
-
-const currentPage = () => {
-  currentTime++;
-  getVisitedSites();
-  displaySiteData(removeWww(window.location.host));
-  updateStats();
+  return -1
 }
 
-//setInterval(currentPage, 10000);
+storage.load("db", genOnLoad(website), genOnLoadEmpty(website))
+
 
 //Ping the background script to keep it from getting onloaded
 function pingBG() {

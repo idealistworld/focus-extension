@@ -26,6 +26,7 @@
       ],
       "run_at": "document_start",
       "js": [
+        "./scripts/storage.js",
         "main.js"
       ]
     }

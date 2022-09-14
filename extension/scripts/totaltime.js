@@ -2,7 +2,7 @@ export function totalTime(db)
 {
     document.getElementById('totalTime').innerHTML = Math.round((countTotalTime(db)/60)*15) + " minutes";
     var advancedData = document.getElementById('total-time-data');
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < Math.min(5, db.length); i++) {
         var siteTime = Math.round((db[i].unixTimeStamps.length/60)*15)
         var siteUrl = db[i].website;
         var position = i + 1;

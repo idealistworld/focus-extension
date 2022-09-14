@@ -41,19 +41,29 @@ function empty () {
 }
 
 function sort(result) {
-    result.sort(compare)
+    result.sort(compareTime)
     storage.save("db", result)
     console.log(result[0].unixTimeStamps.length)
     totalTime(result);
-    mostVisited();
+    result.sort(compareVisits)
+    console.log(result)
+    mostVisited(result);
 }
 
-function compare( a, b ) {
+function compareTime( a, b ) {
     if ( a.unixTimeStamps.length > b.unixTimeStamps.length ){
       return -1;
     } else {
         return 1;
     }
+}
+
+function compareVisits ( a, b ) {
+    if ( a.unixTimeStamps.visits > b.unixTimeStamps.visits ){
+        return -1;
+      } else {
+          return 1;
+      }
 }
 
 function sortDB() {
