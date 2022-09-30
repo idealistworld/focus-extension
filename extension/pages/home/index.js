@@ -1,5 +1,7 @@
 import {mostVisited} from "../../scripts/topsites.js";
 import { totalTime } from "../../scripts/totaltime.js";
+import { timeToday } from "../../scripts/timetoday.js";
+
 //importing not working for class
 class LocalStorage {
     load(name, callback, callbackIsUndefined) {
@@ -41,13 +43,15 @@ function empty () {
 }
 
 function sort(result) {
-    result.sort(compareTime)
-    storage.save("db", result)
-    console.log(result[0].unixTimeStamps.length)
+    result.sort(compareTime);
+    storage.save("db", result);
+    console.log(result[0].unixTimeStamps.length);
     totalTime(result);
-    result.sort(compareVisits)
-    console.log(result)
+    result.sort(compareVisits);
+    console.log(result);
     mostVisited(result);
+    result.sort(compareTimeToday);
+    timeToday(result);
 }
 
 function compareTime( a, b ) {
@@ -65,6 +69,16 @@ function compareVisits ( a, b ) {
           return 1;
       }
 }
+
+function compareTimeToday ( a, b ) {
+    if ( a.unixTimeStamps.length > b.unixTimeStamps.length ){
+        return -1;
+      } else {
+          return 1;
+      }
+}
+
+
 
 function sortDB() {
     storage.load("db", sort, empty)
