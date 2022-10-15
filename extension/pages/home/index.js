@@ -78,6 +78,20 @@ function compareTimeToday ( a, b ) {
       }
 }
 
+function closeSettings () {
+    document.getElementById("settings-container").style.display = "none";
+}
+
+function openSettings () {
+    document.getElementById("settings-container").style.display = "inline";
+}
+
+var closeSetting = document.getElementById("close-settings");
+closeSetting.onclick = closeSettings;
+
+var openSetting = document.getElementById("open-settings");
+openSetting.onclick = openSettings;
+
 
 
 function sortDB() {

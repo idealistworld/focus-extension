@@ -7,13 +7,12 @@
 }
 
 body {
-  /**background-image: url("../../images/background.png");**/
   background-color: #131313;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color: white;
+  color: rgb(171, 171, 171);
   font-family: 'IBM Plex Mono', monospace;
 }
 
@@ -92,6 +91,7 @@ body {
   width: 100%;
   text-align: center;
   bottom: 4%;
+  font-size: 1.2vw;
 }
 
 #contact {
@@ -151,4 +151,63 @@ a:hover {
   line-height: 2em;
   font-size: 1.2vw;
   margin-top: 3%;
+}
+
+#settings-container {
+  background-color: rgba(26, 26, 26, 0.94);
+  z-index: 100;
+  width: 55%;
+  height: 33%;
+  position: absolute;
+  justify-content: center;
+  border:0.1vw solid rgb(94, 94, 94);
+  display: none;
+  padding: 1vw 0vw;
+}
+
+#settings-title {
+  font-size: 3vw;
+  color: rgb(171, 171, 171);
+  text-align: center;
+  font-weight: 300;
+}
+
+#settings-content-container {
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#settings-content-container button {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: transparent;
+  color: rgb(94, 94, 94);
+  padding: 1vw;
+  border:0.1vw solid rgb(94, 94, 94);
+  font-size: 1.1vw;
+}
+
+#settings-content-container button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+#settings-content {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+}
+
+#settings-flexbox {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: space-around;
+  flex-direction: column;
+}
+
+#settings-flexbox #bottom{
+  position: relative;
 }
