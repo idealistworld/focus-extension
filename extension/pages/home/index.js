@@ -36,6 +36,15 @@ class LocalStorage {
     }
 }
 
+function clearData () {
+    alert("asdf")
+}
+
+var clearDataButton = document.getElementById("clear-data-button");
+clearDataButton.onclick = clearData;
+
+
+
 //Sort the Database
 var storage = new LocalStorage()
 function empty () {

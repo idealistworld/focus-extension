@@ -1,3 +1,21 @@
+function timeConversion(mins) {
+    var minutes = mins;
+    var hours = 0;
+    var days = 0;
+    hours = Math.floor(minutes / 60);
+    minutes = minutes - hours * 60;
+
+    if (hours > 0) {
+        return (hours + " hr " + minutes + " min");
+    }
+    else if (hours > 24) {
+        return (hours + " hr " + minutes + " min");
+    }
+    else {
+        return (minutes + " min");
+    }
+}
+
 export function timeToday(db) {
     var sortedList;
     var totalTimeToday = 0;
@@ -13,7 +31,10 @@ export function timeToday(db) {
         db[x].unixTimeStamps["timeToday"] = siteTimeToday;
     }
     var displayData = document.getElementById('timeToday');
-    displayData.innerHTML = totalTimeToday / 4 + " minutes";
+
+  
+
+    displayData.innerHTML = timeConversion(Math.round(totalTimeToday / 4));
 
     function dynamicSort(property) {
         var sortOrder = 1;
@@ -22,9 +43,6 @@ export function timeToday(db) {
             property = property.substr(1);
         }
         return function (a, b) {
-            /* next line works with strings and numbers, 
-             * and you may want to customize it to your needs
-             */
             var result = (a.unixTimeStamps[property] > b.unixTimeStamps[property]) ? -1 : (a.unixTimeStamps[property] < b.unixTimeStamps[property]) ? 1 : 0;
             return result * sortOrder;
         }
@@ -37,9 +55,9 @@ export function timeToday(db) {
     var position = 1;
 
     for (var i = 0; i < 5; i++) {
-        var siteTimeToday = sortedList[i].unixTimeStamps.timeToday / 4;
+        var siteTimeToday = timeConversion(Math.round(sortedList[i].unixTimeStamps.timeToday / 4));
         var siteUrl = sortedList[i].website;
-        advancedData.innerHTML += position + ". " + siteUrl + " [" + siteTimeToday + " minutes]" + "<br>";
+        advancedData.innerHTML += position + ". " + siteUrl + " [" + siteTimeToday + "]" + "<br>";
         position += 1;
     }
 }
