@@ -19,6 +19,8 @@ export function mostVisited(db) {
 
     var sortedList = db.sort(dynamicSort("visits"));
 
+  
+
     for (var i = sortedList.length -1; i > sortedList.length - 6; i--) {
         var siteVisits =  sortedList[i].visits;
         var siteUrl = sortedList[i].website
@@ -28,6 +30,7 @@ export function mostVisited(db) {
 
     var displayData = document.getElementById('topSites');
 
+    displayData.innerHTML = "";
     for (var i = sortedList.length -1; i > sortedList.length - 6; i--) {
         var siteVisits =  sortedList[i].visits;
         var siteUrl = sortedList[i].website

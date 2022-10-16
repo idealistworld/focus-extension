@@ -37,7 +37,8 @@ class LocalStorage {
 }
 
 function clearData () {
-    alert("asdf")
+    chrome.storage.local.clear()
+    location.reload();
 }
 
 var clearDataButton = document.getElementById("clear-data-button");

@@ -17,7 +17,6 @@ function timeConversion(mins) {
 }
 
 export function timeToday(db) {
-    var sortedList;
     var totalTimeToday = 0;
     for (var x = db.length - 1; x >= 0; x--) {
         var siteTimeToday = 0;
