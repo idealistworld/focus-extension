@@ -1,15 +1,15 @@
 function timeConversion(mins) {
     var minutes = mins;
-    var hours = 0;
-    var days = 0;
-    hours = Math.floor(minutes / 60);
-    minutes = minutes - hours * 60;
+    var days = Math.floor(minutes / 1440);
+    minutes -= days * 1440;
+    var hours = Math.floor(minutes / 60);
+    minutes -= hours * 60;
 
-    if (hours > 0) {
-        return (hours + " hr " + minutes + " min");
-    }
-    else if (hours > 24) {
+    if (days > 0) {
         return (days + " days " + hours + " hr " + minutes + " min");
+    }
+    else if (hours > 0) {
+        return (hours + " hr " + minutes + " min");
     }
     else {
         return (minutes + " min");
