@@ -212,6 +212,12 @@ a:hover {
   justify-content: space-around;
 }
 
+#friends-content {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+}
+
 #settings-flexbox {
   height: 100%;
   display: flex;

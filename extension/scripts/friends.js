@@ -20,8 +20,10 @@ const collectionRef = collection(database, "users");
 async function updateStats() {
     chrome.storage.local.get(['id'], function (result) {
         var time = document.getElementById("totalTime").innerHTML;
+        var timeToday = document.getElementById("timeToday").innerHTML;
         const docRef = doc(database, "users", result.id);
-        updateDoc(docRef, { totalTime: time })
+        
+        updateDoc(docRef, { totalTime: time, timeToday: timeToday  })
             .then(docRef => {
                 console.log("Stats updated.")
             })
@@ -35,12 +37,10 @@ async function addFriend() {
     chrome.storage.local.get(['friends'], function (result) {
         var db = result.friends;
         var newFriend = document.getElementById("add-friend-input").value;
-        if (result.friends.indexOf(newFriend) == -1)
-        {
+        if (result.friends.indexOf(newFriend) == -1) {
             db.push(newFriend)
         }
-        else 
-        {
+        else {
             alert("Friend is already added!")
             document.getElementById("add-friend-input").value = "";
             return;
@@ -51,7 +51,6 @@ async function addFriend() {
         });
     });
 }
-
 
 async function clearAllFriends() {
     chrome.storage.local.get(['friends'], function (result) {
@@ -68,17 +67,33 @@ async function setUsername() {
     var yyyy = today.getFullYear();
     var today = mm + '/' + dd + '/' + yyyy;
 
-    var totalTime = document.getElementById("totalTime").innerHTML;
-    var username = document.getElementById("username-input").value;
-    const docRef = await addDoc(collection(database, "users"), {
-        username: username,
-        totalTime: totalTime,
-        created: today
-    });
+        var totalTime = document.getElementById("totalTime").innerHTML;
+        var timeToday = document.getElementById("timeToday").innerHTML;
+        var username = document.getElementById("username-input").value;
+        const docRef = await addDoc(collection(database, "users"), {
+            username: username,
+            totalTime: totalTime,
+            timeToday: timeToday,
+            created: today
+        });
+    
+        chrome.storage.local.set({ id: docRef.id }, function () {
+            username = document.getElementById("username-input").value = "";
+            alert("Your username is set!")
+        });
+        chrome.storage.local.set({ username: username }, function () {
+        });
+}
 
-    chrome.storage.local.set({ id: docRef.id }, function () {
-        username = document.getElementById("username-input").value = "";
-        alert("Your username is set!")
+function checkIfUsername () {
+    chrome.storage.local.get(['username'], function (result) {
+        document.getElementById("username").innerHTML = "Username: " + result.username;
+
+        if (result.username != "")
+        {
+            document.getElementById("username-input").style.display = "none";
+            document.getElementById("set-username").style.display = "none";
+        }
     });
 }
 
@@ -89,6 +104,7 @@ async function setFriendStats() {
         var db = result.friends;
         var username;
         var totalTime;
+        var timeToday
         var advancedData = document.getElementById("friend-data");
         for (var i = 0; i < db.length; i++) {
             var id = db[i];
@@ -96,13 +112,14 @@ async function setFriendStats() {
             getDoc(docRef).then((doc) => {
                 username = doc.data().username;
                 totalTime = doc.data().totalTime;
-                advancedData.innerHTML += "@" + username + " | " + totalTime + " in total <br>";
+                timeToday = doc.data().timeToday;
+                advancedData.innerHTML += "@" + username + " | time in total: " + totalTime + " | last 24HR: " +  timeToday + "<br>";
             })
         }
     });
 }
 
-function setFriensAndStats () {
+function setFriensAndStats() {
     setFriendStats();
     updateStats();
 }
@@ -116,11 +133,13 @@ window.onload = function () {
     var refButton = document.getElementById('clear-friend-button');
     refButton.onclick = clearAllFriends;
     var refButton = document.getElementById('stat-box-friends-stats');
+    checkIfUsername();
+
 
     refButton.onmouseover = setFriensAndStats;
     chrome.storage.local.get(['id'], function (result) {
-        var refButton = document.getElementById('user-id')
-        refButton.innerHTML = result.id;
+        var refButton = document.getElementById('user-id');
+        refButton.innerHTML = "Friend code: " + result.id;
     });
 
 }
