@@ -17,8 +17,6 @@ const analytics = getAnalytics(app);
 const database = getFirestore(app);
 const collectionRef = collection(database, "users");
 
-
-
 async function updateStats() {
     chrome.storage.local.get(['id'], function (result) {
         var time = document.getElementById("totalTime").innerHTML;
