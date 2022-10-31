@@ -4,6 +4,7 @@ try {
   console.log(e);
 }
 
+
 storage = new LocalStorage()
 
 //Get the URL and clip it

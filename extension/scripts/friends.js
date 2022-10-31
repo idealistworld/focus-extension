@@ -17,6 +17,18 @@ const analytics = getAnalytics(app);
 const database = getFirestore(app);
 const collectionRef = collection(database, "users");
 
+function createFriendList ()
+{
+    chrome.storage.local.get(['friends'], function (result) {
+        if (result.friends == null)
+        {
+            chrome.storage.local.set({ friends: [] }, function () {
+            });
+        }
+       
+    });
+}
+
 async function updateStats() {
     chrome.storage.local.get(['id'], function (result) {
         var time = document.getElementById("totalTime").innerHTML;
@@ -88,8 +100,7 @@ async function setUsername() {
 function checkIfUsername () {
     chrome.storage.local.get(['username'], function (result) {
         document.getElementById("username").innerHTML = "Username: " + result.username;
-
-        if (result.username != "")
+        if (result.username.length >= 1)
         {
             document.getElementById("username-input").style.display = "none";
             document.getElementById("set-username").style.display = "none";
@@ -134,7 +145,7 @@ window.onload = function () {
     refButton.onclick = clearAllFriends;
     var refButton = document.getElementById('stat-box-friends-stats');
     checkIfUsername();
-
+    createFriendList();
 
     refButton.onmouseover = setFriensAndStats;
     chrome.storage.local.get(['id'], function (result) {
