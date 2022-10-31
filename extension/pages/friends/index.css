@@ -165,18 +165,6 @@ a:hover {
   padding: 1vw 0vw;
 }
 
-#friends-container {
-  background-color: rgba(26, 26, 26, 0.94);
-  z-index: 100;
-  width: 65%;
-  height: 50%;
-  position: absolute;
-  justify-content: center;
-  border:0.1vw solid rgb(94, 94, 94);
-  display: none;
-  padding: 1vw 0vw;
-}
-
 #settings-title {
   font-size: 3vw;
   color: rgb(171, 171, 171);
@@ -222,16 +210,4 @@ a:hover {
 
 #settings-flexbox #bottom{
   position: relative;
-}
-
-input {
-  border:0.1vw solid rgb(94, 94, 94);
-  color: rgb(94, 94, 94);
-  background-color: rgba(26, 26, 26, 0.94);
-  padding-left: 1vw;
-}
-
-#user-info {
-  margin-top: 3%;
-  text-align: center;
 }

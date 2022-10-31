@@ -1,36 +1,61 @@
 <link rel="stylesheet" href="index.css">
-<script type = "module" src="index.js"></script>
+<script type="module" src="index.js"></script>
+<script type="module" src="../../scripts/friends.js"></script>
 
 <title>focusN | Usage Overview</title>
+
 <body>
-    <div id = "center-content">
-        <img id = "bonsai" src = "../../images/bonsai.png">
-        <div id = "total-time-expand" class = "stat-title">Total Time Stats<ol id = "total-time-data" class = "expanded-data-list"></ol></div>
-        <div id = "time-today-expand" class = "stat-title">Last 24HR Stats<ol id = "time-today-data" class = "expanded-data-list"><ul></ol></div>
-        <div id = "top-sites-expand" class = "stat-title">Top Sites Stats<ol id = "top-sites-data" class = "expanded-data-list"></ol></div>
-        <div id = "friends-stats-expand" class = "stat-title">Friend Stats<ol class = "expanded-data-list">New feature coming soon.</ol></div>
-        <div id = "quote">
-            <p><a id = "quote-content">'We're here to put a dent in the universe. Otherwise why else even be here?'</a></p>
+    <div id="center-content">
+        <img id="bonsai" src="../../images/bonsai.png">
+        <div id="total-time-expand" class="stat-title">Total Time Stats<ol id="total-time-data"
+                class="expanded-data-list"></ol>
         </div>
-        <div class = "divider-line"></div>
-        <div id = "stats-container">
-            <div class = "stat-box"><h1 class = "stat-title"  id = "stat-box-total-time">Total Time</h1><div class = "data" id = "totalTime">Pending...</div></div>
-            <div class = "stat-box"><h1 class = "stat-title" id = "stat-box-time-today">Last 24HR</h1><div class = "data" id = "timeToday">Pending...</div></div>
-            <div class = "stat-box"><h1 class = "stat-title" id = "stat-box-top-sites">Top Sites</h1><div class = "data" id = "topSites">Pending...</div></div>
-            <div class = "stat-box"><h1 class = "stat-title" id = "stat-box-friends-stats">Friend Stats</h1><div class = "data" id = "friendsStats">Coming Soon...</div></div>
+        <div id="time-today-expand" class="stat-title">Last 24HR Stats<ol id="time-today-data"
+                class="expanded-data-list">
+                <ul>
+            </ol>
+        </div>
+        <div id="top-sites-expand" class="stat-title">Top Sites Stats<ol id="top-sites-data" class="expanded-data-list">
+            </ol>
+        </div>
+        <div id="friends-stats-expand" class="stat-title">Friend Stats<ol id="friend-data" class="expanded-data-list">
+            </ol>
+        </div>
+        <div id="quote">
+            <p><a id="quote-content">'We're here to put a dent in the universe. Otherwise why else even be here?'</a>
+            </p>
+        </div>
+        <div class="divider-line"></div>
+        <div id="stats-container">
+            <div class="stat-box">
+                <h1 class="stat-title" id="stat-box-total-time">Total Time</h1>
+                <div class="data" id="totalTime">Pending...</div>
+            </div>
+            <div class="stat-box">
+                <h1 class="stat-title" id="stat-box-time-today">Last 24HR</h1>
+                <div class="data" id="timeToday">Pending...</div>
+            </div>
+            <div class="stat-box">
+                <h1 class="stat-title" id="stat-box-top-sites">Top Sites</h1>
+                <div class="data" id="topSites">Pending...</div>
+            </div>
+            <div class="stat-box">
+                <h1 class="stat-title" id="stat-box-friends-stats">Friend Stats</h1>
+                <div class="data" id="friendsStats">Hover to view</div>
+            </div>
         </div>
 
-        <div id = "settings-container">
-            <div id = "settings-flexbox">
-                <div id = "settings-title">
+        <div id="settings-container">
+            <div id="settings-flexbox">
+                <div id="settings-title">
                     Manage Settings
                 </div>
-                <div id = "settings-content-container">
-                    <div id = "settings-content">
+                <div id="settings-content-container">
+                    <div id="settings-content">
                         <button>
                             Clear all data
                         </button>
-                        <button onclick="clearData()" id = "clear-data-button">
+                        <button onclick="clearData()" id="clear-data-button">
                             Clear all usage data
                         </button>
                         <button>
@@ -38,9 +63,42 @@
                         </button>
                     </div>
                 </div>
-                <div id = "bottom"><p id = "contact"><p id = "close-settings"><a onclick="closeSettings()">close</a></p></div>
+                <div id="bottom">
+                    <p id="contact">
+                    <p id="close-settings"><a onclick="closeSettings()">close</a></p>
+                </div>
+            </div>
+        </div>
+        <div id="friends-container">
+            <div id="settings-flexbox">
+                <div id="settings-title">
+                    Manage Settings
+                </div>
+                <div id = "user-info">
+                    <p id="username">Your Friend Code:</p>
+                    <p id="user-id">User ID</p>
+                </div>
+                <div id="settings-content-container">
+               
+                    <div id="settings-content">
+                        <input id="add-friend-input" placeholder="Friend's Username">
+                        <button id="add-friend-button">Add Friend</button>
+                        <button id = "clear-friend-button">Clear All Friends</button>
+                        <input id="username-input" type="text" placeholder="Your username">
+                        <button id="set-username">
+                            Set Username
+                        </button>
+                    </div>
+                </div>
+                <div id="bottom">
+                    <p id="contact">
+                    <p id="close-friends"><a onclick="closeSettings()">close</a></p>
+                </div>
             </div>
         </div>
     </div>
-    <div id = "bottom"><p id = "contact"><a href = "https://idealist.world/">contact</a></p> | <a id = "open-settings">settings</a> | <p id = "addFriends"><a>add friends</a></p></div>
+    <div id="bottom">
+        <p id="contact"><a href="https://idealist.world/">contact</a></p> | <a id="open-settings">settings</a> | <p
+            id="addFriends"><a id="open-friends">add friends</a></p>
+    </div>
 </body>

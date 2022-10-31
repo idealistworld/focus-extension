@@ -2,6 +2,7 @@ import {mostVisited} from "../../scripts/topsites.js";
 import { totalTime } from "../../scripts/totaltime.js";
 import { timeToday } from "../../scripts/timetoday.js";
 
+
 //importing not working for class
 class LocalStorage {
     load(name, callback, callbackIsUndefined) {
@@ -102,6 +103,19 @@ closeSetting.onclick = closeSettings;
 var openSetting = document.getElementById("open-settings");
 openSetting.onclick = openSettings;
 
+function closeFriends () {
+    document.getElementById("friends-container").style.display = "none";
+}
+
+function openFriends () {
+    document.getElementById("friends-container").style.display = "inline";
+}
+
+var closeFriend = document.getElementById("close-friends");
+closeFriend.onclick = closeFriends;
+
+var openFriend = document.getElementById("open-friends");
+openFriend.onclick = openFriends;
 
 
 function sortDB() {
