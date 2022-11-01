@@ -25,7 +25,6 @@ function createFriendList ()
             chrome.storage.local.set({ friends: [] }, function () {
             });
         }
-       
     });
 }
 
