@@ -1,15 +1,14 @@
 {
   "name": "focusIN",
-  "version": "1.1",
+  "version": "1.2",
   "manifest_version": 3,
   "chrome_url_overrides": {
     "newtab": "./pages/home/index.html"
   },
   "permissions": [
     "storage",
-    "tabs",
-    "scripting"
-  ],
+    "tabs"
+    ],
   "icons": {
     "16": "./images/16.png",
     "48": "./images/48.png",
