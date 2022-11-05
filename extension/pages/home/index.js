@@ -201,7 +201,7 @@ const hideFriendsStats = () =>
 {
     if (!timerRunning)
     {
-        setTimeout(hidingFriendsStats, 8000)
+        setTimeout(hidingFriendsStats, 5000)
     }
 }
 
