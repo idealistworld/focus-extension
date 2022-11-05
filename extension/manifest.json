@@ -1,6 +1,6 @@
 {
   "name": "focusIN",
-  "version": "1.2",
+  "version": "1.4",
   "manifest_version": 3,
   "chrome_url_overrides": {
     "newtab": "./pages/home/index.html"

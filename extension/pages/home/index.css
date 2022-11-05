@@ -235,6 +235,7 @@ input {
   color: rgb(94, 94, 94);
   background-color: rgba(26, 26, 26, 0.94);
   padding-left: 1vw;
+  font-size: 1.25vw;
 }
 
 #user-info {
@@ -246,4 +247,12 @@ input {
 {
   cursor: pointer;
   opacity: 0.5;
+}
+
+#username {
+  font-size: 1.25vw;
+}
+
+#user-id {
+  font-size: 1.25vw;
 }

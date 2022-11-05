@@ -68,7 +68,7 @@ async function addFriend() {
             db.push(newFriend)
         }
         else {
-            alert("Friend is already added!")
+            alert("Friend is already added or invalid input!")
             document.getElementById("add-friend-input").value = "";
             return;
         }
@@ -130,16 +130,17 @@ function removeFriend() {
             }
         })(i);
     }
-    location.reload();
     chrome.storage.local.get(['friends'], function (result) {
         var db = result.friends;
         db.splice(removeIndex, 1);
         chrome.storage.local.set({ friends: db }, function () {
         });
     })
+    location.reload();
+    alert("Friend removed.");
 }
 
-async function setFriendStats() {
+function setFriendStats (){
     var advancedData = document.getElementById("friend-data");
     advancedData.innerHTML = "";
     chrome.storage.local.get(['friends'], function (result) {
@@ -156,13 +157,14 @@ async function setFriendStats() {
                 totalTime = doc.data().totalTime;
                 timeToday = doc.data().timeToday;
                 advancedData.innerHTML += "<div style = 'display: inline'>@" + username + " | time in total: " + totalTime + " | last 24HR: " + timeToday + " | " + "<h4 id = 'removeFriend' style = 'display:inline; font-weight: 100' class = 'remove-friend-x'> remove</h4></div><br>";
-            })
+            }).then(setTimeout(setRemoveFriend, 500)).then(setTimeout(setRemoveFriend, 500)).then(setTimeout(setRemoveFriend, 500));
         }
-        setTimeout(deBug, 600)
     });
-}
+};
 
-function deBug() {
+
+
+function setRemoveFriend() {
     var arr = [];
     var lol = document.getElementsByClassName('remove-friend-x');
     for (var i = 0; i < lol.length; i++) {
@@ -171,6 +173,7 @@ function deBug() {
     for (var i = 0; i < arr.length; i++) {
         arr[i].addEventListener("click", removeFriend)
     }
+
 }
 
 function friendsAndUpdate() {
@@ -186,10 +189,10 @@ window.onload = function () {
     var refButton = document.getElementById('clear-friend-button');
     refButton.onclick = clearAllFriends;
     var refButton = document.getElementById('stat-box-friends-stats');
+    refButton.onmouseover = friendsAndUpdate;
     checkIfUsername();
     createFriendList();
     handleDataUpdate();
-    refButton.onmouseover = friendsAndUpdate;
     chrome.storage.local.get(['id'], function (result) {
         var refButton = document.getElementById('user-id');
         refButton.innerHTML = "Friend code: " + result.id;
