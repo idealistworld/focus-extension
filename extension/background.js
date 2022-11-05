@@ -82,8 +82,5 @@ function checkDB (db, curUrl) {
   return -1
 }
 
-
-
 currentPage()
 setInterval(currentPage, 15000);
-

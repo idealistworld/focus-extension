@@ -167,17 +167,42 @@ const hideTopSites = () =>
     document.getElementById("bonsai").style.display = "inline";
 }
 
+var timerRunning = false;
+
 const displayFriendsStats = () =>
 {
     document.getElementById("friends-stats-expand").style.display = "inline";
     document.getElementById("bonsai").style.display = "none";
+    document.getElementById("stat-box-total-time").removeEventListener("mouseover", displayTotalTime);
+    document.getElementById("stat-box-total-time").removeEventListener("mouseout", hideTotalTime);
 
+    document.getElementById("stat-box-time-today").removeEventListener("mouseover", displayTimeToday);
+    document.getElementById("stat-box-time-today").removeEventListener("mouseout", hideTimeToday);
+
+    document.getElementById("stat-box-top-sites").removeEventListener("mouseover", displayTopSites);
+    document.getElementById("stat-box-top-sites").removeEventListener("mouseout", hideTopSites);
+}
+
+const hidingFriendsStats = () => {
+    document.getElementById("stat-box-total-time").addEventListener("mouseover", displayTotalTime);
+    document.getElementById("stat-box-total-time").addEventListener("mouseout", hideTotalTime);
+
+    document.getElementById("stat-box-time-today").addEventListener("mouseover", displayTimeToday);
+    document.getElementById("stat-box-time-today").addEventListener("mouseout", hideTimeToday);
+
+    document.getElementById("stat-box-top-sites").addEventListener("mouseover", displayTopSites);
+    document.getElementById("stat-box-top-sites").addEventListener("mouseout", hideTopSites);
+    document.getElementById("friends-stats-expand").style.display = "none";
+    document.getElementById("bonsai").style.display = "inline";
+    timeRunning = true;
 }
 
 const hideFriendsStats = () =>
 {
-    document.getElementById("friends-stats-expand").style.display = "none";
-    document.getElementById("bonsai").style.display = "inline";
+    if (!timerRunning)
+    {
+        setTimeout(hidingFriendsStats, 8000)
+    }
 }
 
 const onLoad = () =>

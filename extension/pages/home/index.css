@@ -241,3 +241,9 @@ input {
   margin-top: 3%;
   text-align: center;
 }
+
+.remove-friend-x:hover 
+{
+  cursor: pointer;
+  opacity: 0.5;
+}
