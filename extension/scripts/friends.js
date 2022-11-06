@@ -157,7 +157,14 @@ function setFriendStats (){
                 totalTime = doc.data().totalTime;
                 timeToday = doc.data().timeToday;
                 advancedData.innerHTML += "<div style = 'display: inline'>@" + username + " | time in total: " + totalTime + " | last 24HR: " + timeToday + " | " + "<h4 id = 'removeFriend' style = 'display:inline; font-weight: 100' class = 'remove-friend-x'> remove</h4></div><br>";
-            }).then(setTimeout(setRemoveFriend, 500)).then(setTimeout(setRemoveFriend, 500)).then(setTimeout(setRemoveFriend, 500));
+            }).then(setTimeout(setRemoveFriend, 500));
+            setRemoveFriend();
+            setTimeout(setRemoveFriend, 700)
+            setTimeout(setRemoveFriend, 900)
+            setTimeout(setRemoveFriend, 1100)
+            setTimeout(setRemoveFriend, 1300)
+            setTimeout(setRemoveFriend, 1500)
+            setTimeout(setRemoveFriend, 17000)
         }
     });
 };
